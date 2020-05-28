@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.enrique.task.model.User;
@@ -13,6 +14,7 @@ import es.enrique.task.service.UserService;
 
 
 @Controller("loginControllerClass")
+@SessionAttributes("userInSession")
 public class LoginControllerClass {
 	
 	@Autowired 

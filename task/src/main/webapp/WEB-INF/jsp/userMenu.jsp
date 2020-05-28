@@ -30,9 +30,9 @@
 	<div class="card" style="width: 18rem;">
 	  	<img class="card-img-top" width="286" height="180" src="https://youtalkonline.com/wp-content/uploads/conjugacion-verbo-to-do-en-ingles-300x266.jpg" alt="Card image cap">
 	  	<div class="card-body">
-	  		  <h5 class="card-title">List of Workers</h5>
-	   		<p class="card-text">List of your colleagues</p>
-	    <a href="/LoadWorkersList" class="btn btn-dark">Add</a>
+	  		  <h5 class="card-title">To Do list</h5>
+	   		<p class="card-text">Create your tasks here</p>
+	    <a href="/LoadToDoTaskList" class="btn btn-dark">Go</a>
 	  	</div>
 	</div>
 	</div>
@@ -40,9 +40,9 @@
 	<div class="card" style="width: 18rem;">
 	  	<img class="card-img-top" width="286" height="180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSJw_LZEx_q4EoNRWmi_jCFNAhz6uUL9r5L7IitePXHQfmvZMxP&usqp=CAU">
 	  	<div class="card-body">
-	  		  <h5 class="card-title">List of Flights</h5>
-	   		<p class="card-text">All flights Available</p>
-	    <a href="/LoadFlightsList" class="btn btn-dark">Add</a>
+	  		  <h5 class="card-title">In Progress List</h5>
+	   		<p class="card-text">Check your pending tasks</p>
+	    <a href="/LoadInProgressTaskList" class="btn btn-dark">Go</a>
 	  	</div>
 	</div>
 	</div>
@@ -50,9 +50,9 @@
 	<div class="card" style="width: 18rem;">
 	  	<img class="card-img-top" width="286" height="180" src="https://www.photos-public-domain.com/wp-content/uploads/2012/08/done.jpg">
 	  	<div class="card-body">
-	  		  <h5 class="card-title">List of Cabin Crew Flight 4 Workers</h5>
-	   		<p class="card-text">Groups of Four Workers</p>
-	    <a href="/cabinCrewFlight4Workers" class="btn btn-dark">Add</a>
+	  		  <h5 class="card-title">Completed tasks</h5>
+	   		<p class="card-text">List of completed tasks!</p>
+	    <a href="/LoadDoneTaskList" class="btn btn-dark">Go</a>
 	  	</div>
 	</div>
 	</div>
