@@ -7,7 +7,7 @@ public class Driver {
 		Connection myConn = null;
 		try {
 			TimeZone.getDefault();
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Task", "root", "IVSZ2h12");
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Task?useSSL=false", "root", "IVSZ2h12");
 			//?useLegacyDatetimeCode=false
 			//?verifyServerCertificate=false
 			Statement myStmnt = myConn.createStatement();

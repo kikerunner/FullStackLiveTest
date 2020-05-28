@@ -13,7 +13,7 @@
 <div class="container">
 	<h1 align="center">Task Resolver!</h1>
 	<div align="center">
-		<a href="/login">INICIAR SESIÓN</a>
+		<a class="btn btn-primary" href="/login" role="button">LogIn</a>
 	</div>
 </div>
 <script src="js/bootstrap.min.js"></script>  
