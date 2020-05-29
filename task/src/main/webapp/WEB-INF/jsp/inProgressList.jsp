@@ -58,6 +58,8 @@
 				<td><c:out value="${task.getPriority().getPriorityName()}"/> </td>
 				
 				<td><c:out value="${task.getStatus().getStatusName()}"/> </td>
+				
+				<td><a href="/editingTask?idTask=${task.getIdTask()}">Edit Task</a></td>
 	    	</tr>
 		</c:forEach>
 	</tbody>
