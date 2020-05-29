@@ -18,6 +18,7 @@ public class Task {
 	private String name;
 	private String description;
 	private Date deadLine;
+	private int idUser;
 	
 	public Priority getPriority() {
 		return priority;
@@ -55,4 +56,11 @@ public class Task {
 	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
 	}
+	public int getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+	
 }

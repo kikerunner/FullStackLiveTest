@@ -24,6 +24,7 @@
 		</div>
 		<div class="col">
 			<img class="mb-4" src="https://media-exp1.licdn.com/dms/image/C561BAQHAdLVwsteyQA/company-background_10000/0?e=2159024400&v=beta&t=OKrsQVawuG4VVzO8Lmalz_7pyWDib7hFPezCzfEC1pM" alt="" height="125">
+			<a href="/addTask" class="btn btn-secondary">Create Task!</a>
 		</div>
 	</div>
 </div>  
