@@ -42,7 +42,8 @@ public class RepositoryUser {
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 		try {
-			prepareStatement = conn.prepareStatement("SELECT idUser, userName, surname, password FROM Users WHERE userName = (?)");
+			prepareStatement = conn.prepareStatement("SELECT idUser, userName, surname, password "
+					+ "FROM Users WHERE userName = (?)");
 			prepareStatement.setString(1, userName);
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {

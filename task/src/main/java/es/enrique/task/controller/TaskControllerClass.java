@@ -84,8 +84,8 @@ public class TaskControllerClass {
 	}
 	
 	@PostMapping(path="/editingTask")
-	public String postEditTask(Task task, Priority priority, Status status)  {
-		taskService.editTask(task, priority, status);
+	public String postEditTask(Task taskToEdit, Priority priority, Status status)  {
+		taskService.editTask(taskToEdit, priority, status);
 		return "userMenu";
 	}
 }

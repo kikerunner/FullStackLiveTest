@@ -37,7 +37,7 @@ public class TaskService {
 	public void addTask(Task task, Priority priority, Status status) {
 		repositoryTask.insertTask(task, priority, status);
 	}
-	public void editTask(Task task, Priority priority, Status status) {
-		repositoryTask.insertTask(task, priority, status);
+	public void editTask(Task taskToEdit, Priority priority, Status status) {
+		repositoryTask.editTask(taskToEdit, priority, status);
 	}
 }

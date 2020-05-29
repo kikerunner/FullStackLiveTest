@@ -7,9 +7,8 @@ public class Driver {
 		Connection myConn = null;
 		try {
 			TimeZone.getDefault();
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Task?useSSL=false", "root", "IVSZ2h12");
-			//?useLegacyDatetimeCode=false
-			//?verifyServerCertificate=false
+			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Task?useSSL=false",
+					"root", "IVSZ2h12");
 			Statement myStmnt = myConn.createStatement();
 			ResultSet myRs = myStmnt.executeQuery("select * from Status");
 			while (myRs.next()) {

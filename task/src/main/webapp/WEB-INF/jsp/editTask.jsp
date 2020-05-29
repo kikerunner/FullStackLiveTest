@@ -44,6 +44,7 @@
 				<form:options items="${StatusList}" itemValue="idStatus" itemLabel="StatusName" />
 		</form:select>
 		<form:input value="${userInSession.getIdUser()}" type="hidden" name="idUser" path="idUser" class="form-control" width="250px"/>
+		<form:input value="${idTask}" type="hidden" name="idTask" path="idTask" class="form-control" width="250px"/>
 		<input type="submit" class="btn btn-primary" >
 	</form:form>
 </div>
