@@ -36,12 +36,12 @@
 		<label>Dead Line:</label>
 		<form:input type="date" name="DeadLine" path="DeadLine" class="form-control" width="250px"/>
 		<label>Priority:</label>
-		<form:select class="form-control" path="Priority" >
+		<form:select class="form-control" path="idPriority" >
 				<form:option value="0">Select Priority</form:option>
 				<form:options items="${PriorityList}" itemValue="idPriority" itemLabel="PriorityName" />
 		</form:select>
 		<label>Status:</label>
-		<form:select class="form-control" path="Status" >
+		<form:select class="form-control" path="idStatus" >
 				<form:option value="0">Select Status</form:option>
 				<form:options items="${StatusList}" itemValue="idStatus" itemLabel="StatusName" />
 		</form:select>

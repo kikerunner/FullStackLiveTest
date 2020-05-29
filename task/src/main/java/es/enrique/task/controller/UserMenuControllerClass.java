@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.enrique.task.model.Task;
 import es.enrique.task.model.User;
+import es.enrique.task.model.UserInSession;
 import es.enrique.task.service.TaskService;
 
 
@@ -18,6 +20,7 @@ import es.enrique.task.service.TaskService;
 @SessionAttributes("userInSession")
 public class UserMenuControllerClass {
 	
+
 	@Autowired 
 	List<Task> todoTaskList;
 	
@@ -32,10 +35,11 @@ public class UserMenuControllerClass {
 	TaskService taskService;
 	
 	@GetMapping(path = "/LoadToDoTaskList")
-	public ModelAndView loadToDoTaskList() {
-		todoTaskList = taskService.selectAllToDoTaskList();
+	public ModelAndView loadToDoTaskList(@ModelAttribute("userInSession") User userLoad) {
+		todoTaskList = taskService.selectAllToDoTaskList(userLoad.getIdUser());
 		ModelAndView model = new ModelAndView("todoList");
-		model.addObject("todoTaskList", todoTaskList);
+		model.addObject("userInSession", userLoad);
+		model.addObject("todoTaskList", todoTaskList);		
 		return model;
 	}
 	

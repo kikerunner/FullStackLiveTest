@@ -1,6 +1,7 @@
 package es.enrique.task.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,14 +40,15 @@ public class RespositoryTask {
 		}
 	}
 	
-	public List<Task> selectAllTodoTaskList() {
+	public List<Task> selectAllTodoTaskList(int userLoadID) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		List<Task> tasksList = new ArrayList<Task>();
 		
 		try {
 			preparedStatement = conn
-					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'toDo'");
+					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'toDo' AND T.idUser = ?");
+			preparedStatement.setInt(1, userLoadID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Task taskFromDataBase = new Task();
@@ -72,7 +74,7 @@ public class RespositoryTask {
 		return tasksList;
 	}
 	
-	public List<Task> selectAllInProgressList() {
+	public List<Task> selectAllInProgressList(int userLoadID) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		List<Task> tasksList = new ArrayList<Task>();
@@ -80,6 +82,7 @@ public class RespositoryTask {
 		try {
 			preparedStatement = conn
 					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'inProgress'");
+			preparedStatement.setInt(1, userLoadID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Task taskFromDataBase = new Task();
@@ -105,7 +108,7 @@ public class RespositoryTask {
 		return tasksList;
 	}
 	
-	public List<Task> selectAllDoneList() {
+	public List<Task> selectAllDoneList(int userLoadID) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		List<Task> tasksList = new ArrayList<Task>();
@@ -113,6 +116,7 @@ public class RespositoryTask {
 		try {
 			preparedStatement = conn
 					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'Done'");
+			preparedStatement.setInt(1, userLoadID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Task taskFromDataBase = new Task();
@@ -136,5 +140,26 @@ public class RespositoryTask {
 			manager.close(conn);
 		}
 		return tasksList;
+	}
+	
+	public void insertTask(Task task, Priority priority, Status status) {
+		Connection conn = manager.open(jdbcUrl);
+		PreparedStatement prepareStatement = null;
+		try {
+			prepareStatement = conn.prepareStatement("INSERT INTO `Task`.`Tasks` (`Name`, `Description`, `DeadLine`, `IdPriority`, `idStatus`, `idUser`) VALUES (?, ?, ?, ?, ?, ?)");
+			prepareStatement.setString(1, task.getName());
+			prepareStatement.setString(2, task.getDescription());
+			prepareStatement.setDate(3, task.getDeadLine());
+			prepareStatement.setInt(4, priority.getIdPriority());
+			prepareStatement.setInt(5, status.getIdStatus());
+			prepareStatement.setInt(6, task.getIdUser());
+			prepareStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}finally {
+			close(prepareStatement);
+		}
+		manager.close(conn);
 	}
 }

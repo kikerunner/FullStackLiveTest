@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import es.enrique.task.model.Priority;
+import es.enrique.task.model.Status;
 import es.enrique.task.model.Task;
 import es.enrique.task.model.User;
 import es.enrique.task.repository.RespositoryTask;
@@ -16,15 +18,19 @@ public class TaskService {
 	@Qualifier("repositoryTask")
 	private RespositoryTask repositoryTask;
 	
-	public List<Task> selectAllToDoTaskList() {
-		return repositoryTask.selectAllTodoTaskList();
+	public List<Task> selectAllToDoTaskList(int userLoadID) {
+		return repositoryTask.selectAllTodoTaskList(userLoadID);
 	}
 	
-	public List<Task> selectAllInProgressTaskList() {
-		return repositoryTask.selectAllInProgressList();
+	public List<Task> selectAllInProgressTaskList(int userLoadID) {
+		return repositoryTask.selectAllInProgressList(userLoadID);
 	}
 	
-	public List<Task> selectAllDoneTaskList() {
-		return repositoryTask.selectAllDoneList();
+	public List<Task> selectAllDoneTaskList(int userLoadID) {
+		return repositoryTask.selectAllDoneList(userLoadID);
+	}
+	
+	public void addTask(Task task, Priority priority, Status status) {
+		repositoryTask.insertTask(task, priority, status);
 	}
 }

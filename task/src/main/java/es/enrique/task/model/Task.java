@@ -1,6 +1,6 @@
 package es.enrique.task.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +19,9 @@ public class Task {
 	private String description;
 	private Date deadLine;
 	private int idUser;
+	
+	private int idPriority;
+	private int idStatus;
 	
 	public Priority getPriority() {
 		return priority;
@@ -61,6 +64,18 @@ public class Task {
 	}
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
+	}
+	public int getIdPriority() {
+		return idPriority;
+	}
+	public void setIdPriority(int idPriority) {
+		this.idPriority = idPriority;
+	}
+	public int getIdStatus() {
+		return idStatus;
+	}
+	public void setIdStatus(int idStatus) {
+		this.idStatus = idStatus;
 	}
 	
 }
