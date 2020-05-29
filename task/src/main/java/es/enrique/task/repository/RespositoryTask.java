@@ -142,6 +142,40 @@ public class RespositoryTask {
 		return tasksList;
 	}
 	
+	public Task selectTaskByID(int idTask) {
+		Connection conn = manager.open(jdbcUrl);
+		PreparedStatement preparedStatement = null;
+		Task task = new Task();
+		
+		try {
+			preparedStatement = conn
+					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND T.idTask = ?");
+			preparedStatement.setInt(1, idTask);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Task taskFromDataBase = new Task();
+				taskFromDataBase.setIdTask(resultSet.getInt(1));
+				taskFromDataBase.setName(resultSet.getString(2));
+				taskFromDataBase.setDescription(resultSet.getString(3));
+				taskFromDataBase.setDeadLine(resultSet.getDate(4));
+				Priority priorityInDatabase = new Priority();
+				priorityInDatabase.setPriorityName(resultSet.getString(5));
+				taskFromDataBase.setPriority(priorityInDatabase);
+				Status statusInDatabase = new Status();
+				statusInDatabase.setStatusName(resultSet.getString(6));
+				taskFromDataBase.setStatus(statusInDatabase);
+				task = taskFromDataBase;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(preparedStatement);
+			manager.close(conn);
+		}
+		return task;
+	}
+	
 	public void insertTask(Task task, Priority priority, Status status) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement prepareStatement = null;
@@ -153,6 +187,27 @@ public class RespositoryTask {
 			prepareStatement.setInt(4, priority.getIdPriority());
 			prepareStatement.setInt(5, status.getIdStatus());
 			prepareStatement.setInt(6, task.getIdUser());
+			prepareStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}finally {
+			close(prepareStatement);
+		}
+		manager.close(conn);
+	}
+	public void editTask(Task task, Priority priority, Status status) {
+		Connection conn = manager.open(jdbcUrl);
+		PreparedStatement prepareStatement = null;
+		try {
+			prepareStatement = conn.prepareStatement("UPDATE `Task`.`Tasks` SET `Name` = ?, `Description` = ?, `DeadLine` = ?, `IdPriority` = ?, `idStatus` = ?, `idUser` = ? WHERE (`idTask` = ?)");
+			prepareStatement.setString(1, task.getName());
+			prepareStatement.setString(2, task.getDescription());
+			prepareStatement.setDate(3, task.getDeadLine());
+			prepareStatement.setInt(4, priority.getIdPriority());
+			prepareStatement.setInt(5, status.getIdStatus());
+			prepareStatement.setInt(6, task.getIdUser());
+			prepareStatement.setInt(6, task.getIdTask());
 			prepareStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

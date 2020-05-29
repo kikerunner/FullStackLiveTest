@@ -30,7 +30,14 @@ public class TaskService {
 		return repositoryTask.selectAllDoneList(userLoadID);
 	}
 	
+	public Task selectTaskByID(int idTask) {
+		return repositoryTask.selectTaskByID(idTask);
+	}
+	
 	public void addTask(Task task, Priority priority, Status status) {
+		repositoryTask.insertTask(task, priority, status);
+	}
+	public void editTask(Task task, Priority priority, Status status) {
 		repositoryTask.insertTask(task, priority, status);
 	}
 }

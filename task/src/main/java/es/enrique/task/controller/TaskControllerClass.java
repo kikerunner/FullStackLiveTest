@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,9 @@ import es.enrique.task.service.UserService;
 @Controller("taskControllerClass")
 @SessionAttributes("userInSession")
 public class TaskControllerClass {
+	
+	@Autowired
+	Task taskToEdit;
 
 	@Autowired 
 	@Qualifier("userService")
@@ -62,6 +66,26 @@ public class TaskControllerClass {
 	@PostMapping(path="/addTask")
 	public String addTask(Task task, Priority priority, Status status)  {
 		taskService.addTask(task, priority, status);
+		return "userMenu";
+	}
+	
+	@GetMapping(path = "/editingTask")
+	public ModelAndView getEditTask(@RequestParam int idTask) {
+		priorityList = priorityService.selectAllPriorityList();
+		statusList = statusService.selectAllStatusList();
+		taskToEdit = taskService.selectTaskByID(idTask);
+		ModelAndView model = new ModelAndView("editTask");
+		model.addObject("taskToEdit", taskToEdit);
+		model.addObject("priority", new Priority());
+		model.addObject("status", new Status());
+		model.addObject("PriorityList", priorityList);
+		model.addObject("StatusList", statusList);
+		return model;
+	}
+	
+	@PostMapping(path="/editingTask")
+	public String postEditTask(Task task, Priority priority, Status status)  {
+		taskService.editTask(task, priority, status);
 		return "userMenu";
 	}
 }
