@@ -63,6 +63,13 @@
 	</tbody>
 </table>
 </div>
+<div class="container">
+	<div class="row">
+		<div class="col" align="center">
+	<a href="/userMenu" class="btn btn-secondary">Main menu</a>
+		</div>
+	</div>
+</div>  
 	<script src="js/bootstrap.min.js"></script> 
 </body>
 </html>

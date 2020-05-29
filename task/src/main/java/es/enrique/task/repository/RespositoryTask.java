@@ -81,7 +81,7 @@ public class RespositoryTask {
 		
 		try {
 			preparedStatement = conn
-					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'inProgress'");
+					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'inProgress' AND T.idUser = ?");
 			preparedStatement.setInt(1, userLoadID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -115,7 +115,7 @@ public class RespositoryTask {
 		
 		try {
 			preparedStatement = conn
-					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'Done'");
+					.prepareStatement("SELECT T.idTask, T.Name, T.Description, T.DeadLine, P.PriorityName, S.statusName FROM Task.Tasks AS T, Task.Priorities AS P, Task.Status AS S WHERE (T.IdPriority = P.IdPriority) AND (T.idStatus = S.idStatus) AND S.statusName = 'Done' AND T.idUser = ?");
 			preparedStatement.setInt(1, userLoadID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
